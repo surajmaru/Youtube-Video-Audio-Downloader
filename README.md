@@ -14,6 +14,8 @@
 
 ### Clone my repo:-
 - git clone https://github.com/surajmaru/Youtube-Video-Audio-Downloader.git
+- git clone https://github.com/surajmaru/VIDEO-DOWNLOADER-LOCAL.git
+
 
 ### Download yt-dlp.exe and ffmpeg from my repo release.
 - Dont run that exe just put that in a folder like "C:\yt-dlp\yt-dlp.exe" like this then,
