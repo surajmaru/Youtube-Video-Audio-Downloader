@@ -31,7 +31,10 @@ git clone https://github.com/surajmaru/Youtube-Video-Audio-Downloader.git
 - C:\ffmpeg\bin
 - Click Okay and thats it.
 
-### Now open the project folder in vs code and go into the backend folder and run the server like:-
+### Download essential packages and components:
+- Go into the backend folder in terminal do `` npm install ``
+
+### Now go into the backend folder and run the server like:-
 - node server.js
 
 ### Then just open the index.html in the brower and it will work 💯
