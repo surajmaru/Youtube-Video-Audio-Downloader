@@ -1,6 +1,6 @@
 # Youtube Video and Audio downlaoder
 
-## This tool runs locally in your pc so follow the below procedure stepby step.
+## This tool runs locally in your pc so follow the below procedure step by step.
 
 ## This project is done using:-
 - javascript
