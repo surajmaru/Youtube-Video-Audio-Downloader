@@ -12,7 +12,7 @@
 ### clone my repo in your project folder
 
 ### Download yt-dlp.exe from: https://github.com/yt-dlp/yt-dlp/releases/tag/2025.12.08
-- dont run that exe just put that in a folder like "C:\yt-dlp\ytdlp.exe" like this.
+- dont run that exe just put that in a folder like "C:\yt-dlp\yt-dlp.exe" like this.
   
 ### Download ffmpeg from: https://github.com/GyanD/codexffmpeg/releases/tag/2026-01-12-git-21a3e44fbe
 - same unzip the folder in like "C:\ffmpeg".
