@@ -17,7 +17,7 @@
 ### Download ffmpeg from: https://github.com/GyanD/codexffmpeg/releases/tag/2026-01-12-git-21a3e44fbe
 - same unzip the folder in like "C:\ffmpeg".
 
-### Then d both of them to the environment path like:-
+### Then add both of them to the environment path like:-
 - on windows search environment variables open it and click *environment variables*
 - then go to system variables -> *Path* then double click it.
 - click on *New* and paste the path of those both files ex:-
