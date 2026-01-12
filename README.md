@@ -18,7 +18,8 @@
 - dont run that exe just put that in a folder like "C:\yt-dlp\yt-dlp.exe" like this.
   
 ### Download ffmpeg from: https://github.com/GyanD/codexffmpeg/releases/tag/2026-01-12-git-21a3e44fbe
-- same unzip the folder in like "C:\ffmpeg".
+- Downlaod this zip:- ffmpeg-2026-01-12-git-21a3e44fbe-essentials_build.zip
+- Then unzip the folder in like "C:\ffmpeg".
 
 ### Then add both of them to the environment path like:-
 - on windows search environment variables open it and click *environment variables*
