@@ -35,6 +35,6 @@ git clone https://github.com/surajmaru/Youtube-Video-Audio-Downloader.git
 - Go into the backend folder in terminal do `` npm install ``
 
 ### Now go into the backend folder and run the server like:-
-- node server.js
+`` node server.js ``
 
 ### Then just open the index.html in the brower and it will work 💯
