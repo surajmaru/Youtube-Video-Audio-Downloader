@@ -1,0 +1,139 @@
+body {
+  font-family: Arial, sans-serif;
+  /* background: #086bb7; */
+  background: linear-gradient(45deg, rgb(255, 0, 0), rgb(11, 109, 246));
+  color: #fff;
+  /* background-image: url("https://wallpaperaccess.com/full/2424684.jpg"); */
+  background-image: url("https://wallpaperaccess.com/full/2424707.jpg");
+  /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+h2 { 
+    margin: 0px 0px 0px 0px; 
+    text-align: center;
+    font-size: 3rem;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+  border: 1px solid black;
+  font-size: 18px;
+  background-color: transparent;
+  /* width: 80%; */
+}
+input::placeholder{
+    color: white;
+}
+
+button {
+  padding: 10px 15px;
+  /* width: 100%; */
+  font-size: 18px;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+  cursor: pointer;
+  background: #4caf50;
+  color: white;
+  border: 1px solid black;
+  border-left: none;
+}
+
+button:hover { opacity: 0.9; }
+
+.tabs {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  justify-self: center;
+}
+
+.tab {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #333;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab.active {
+  background: #4caf50;
+  font-weight: bold;
+}
+
+.content {
+  background: #1e1e1e;
+  padding: 35px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  justify-self: center;
+  /* margin: 0px 0px 200px 0px; */
+  margin: 20px 0px;
+  /* margin-bottom: 20px; */
+}
+
+.hidden { display: none; }
+
+.format {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 250px;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+  align-items: center;
+}
+
+.format:last-child { border-bottom: none; }
+
+/* Progress bar */
+#progressBox {
+  margin-top: 20px;
+  display: none;
+}
+
+#progressOuter {
+  width: 100%;
+  height: 18px;
+  background: #333;
+  border-radius: 10px;
+}
+
+#progressInner {
+  width: 0%;
+  height: 100%;
+  background: #4caf50;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* Loader */
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 4px solid #333;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.small {
+  color: #aaa;
+  font-size: 13px;
+  margin-left: 20px;
+}

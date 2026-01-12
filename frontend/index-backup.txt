@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>YouTube Downloader</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 30px;
+}
+
+h2 { margin-bottom: 15px; }
+
+input {
+  width: 65%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #4caf50;
+  color: white;
+}
+
+button:hover { opacity: 0.9; }
+
+.tabs {
+  margin-top: 25px;
+}
+
+.tab {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #333;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab.active {
+  background: #4caf50;
+  font-weight: bold;
+}
+
+.content {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 0 5px 5px 5px;
+}
+
+.hidden { display: none; }
+
+.format {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+}
+
+.format:last-child { border-bottom: none; }
+
+/* Progress bar */
+#progressBox {
+  margin-top: 20px;
+  display: none;
+}
+
+#progressOuter {
+  width: 100%;
+  height: 18px;
+  background: #333;
+  border-radius: 10px;
+}
+
+#progressInner {
+  width: 0%;
+  height: 100%;
+  background: #4caf50;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* Loader */
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 4px solid #333;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>YouTube Downloader</h2>
+
+<input id="url" placeholder="Paste YouTube URL">
+<button onclick="getInfo()">Get Info</button>
+<div class="loader" id="loader"></div>
+
+
+<div class="tabs">
+  <div class="tab active" id="vTab" onclick="tab('v')">Video</div>
+  <div class="tab" id="aTab" onclick="tab('a')">Audio</div>
+</div>
+
+<div class="content" id="videoBox"></div>
+<div class="content hidden" id="audioBox"></div>
+
+<div id="progressBox">
+  <div id="progressOuter">
+    <div id="progressInner">0%</div>
+  </div>
+</div>
+
+<script>
+let videoFormats = [];
+let audioFormats = [];
+
+function tab(t) {
+  vTab.classList.toggle("active", t === "v");
+  aTab.classList.toggle("active", t === "a");
+  videoBox.classList.toggle("hidden", t !== "v");
+  audioBox.classList.toggle("hidden", t !== "a");
+}
+
+async function getInfo() {
+  const url = document.getElementById("url").value.trim();
+  if (!url) return alert("Paste a YouTube URL");
+
+  const res = await fetch("http://localhost:5000/api/info", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url })
+  });
+
+  const data = await res.json();
+  videoFormats = data.videoFormats;
+  audioFormats = data.audioFormats;
+
+  render();
+}
+
+function render() {
+  const url = document.getElementById("url").value;
+
+  videoBox.innerHTML = videoFormats.map(f => `
+    <div class="format">
+      <span>${f.label}</span>
+      <button onclick="downloadVideo('${url}','${f.id}')">Download</button>
+    </div>
+  `).join("");
+
+  audioBox.innerHTML = audioFormats.map(f => `
+    <div class="format">
+      <span>${f.bitrate}</span>
+      <button onclick="downloadAudio('${url}','${f.id}')">Download</button>
+    </div>
+  `).join("");
+}
+
+/* ========= FAKE PROGRESS ========= */
+function fakeProgress() {
+  progressBox.style.display = "block";
+  let p = 0;
+
+  const i = setInterval(() => {
+    p += Math.random() * 6;
+    if (p > 90) p = 90;
+    progressInner.style.width = p + "%";
+    progressInner.textContent = Math.floor(p) + "%";
+  }, 250);
+
+  return () => {
+    clearInterval(i);
+    progressInner.style.width = "100%";
+    progressInner.textContent = "100%";
+    setTimeout(() => progressBox.style.display = "none", 1000);
+  };
+}
+
+/* ========= DOWNLOAD ========= */
+function downloadVideo(url, id) {
+  const stop = fakeProgress();
+
+  const a = document.createElement("a");
+  a.href = `http://localhost:5000/download/video?url=${encodeURIComponent(url)}&formatId=${id}`;
+  a.download = "";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(stop, 2000);
+}
+
+function downloadAudio(url, id) {
+  const stop = fakeProgress();
+
+  fetch("http://localhost:5000/api/download/audio", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, formatId: id })
+  }).then(r => r.blob())
+    .then(b => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.download = "audio.mp3";
+      a.click();
+      stop();
+    });
+}
+</script>
+
+</body>
+</html>
