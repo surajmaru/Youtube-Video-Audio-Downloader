@@ -13,7 +13,8 @@
 ## Installation
 
 ### Clone my repo:-
-``bash
+
+``
 git clone https://github.com/surajmaru/Youtube-Video-Audio-Downloader.git
 ``
 
